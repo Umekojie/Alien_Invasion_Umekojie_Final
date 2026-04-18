@@ -1,0 +1,2 @@
+pathlib==1.01
+pygame==2.6.1
