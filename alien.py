@@ -33,9 +33,10 @@ class Alien(Sprite):
         # Check if alien has reached screen edge
         if self.check_edges():
             self.settings.fleet_direction *= -1
-        # Move alien in current direction
+            self.y += self.settings.fleet_drop_speed
         self.x += temp_speed * self.settings.fleet_direction
         self.rect.x = self.x
+        self.rect.y = self.y
 
     #collision decetion for grub
     def check_edges(self):
