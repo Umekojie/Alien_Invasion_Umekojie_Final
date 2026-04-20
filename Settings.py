@@ -20,7 +20,7 @@ class Settings:
         self.ship_file = Path.cwd()/'Assets'/'images'/'Ladyship.png'
         self.ship_w = 100
         self.ship_h = 120
-
+        self.starting_ship_count = 3
         self.ship_speed = 5
 
         self.bullet_file = Path.cwd()/'Assets'/'images'/'rosebullet.png'
