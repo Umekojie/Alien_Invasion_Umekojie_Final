@@ -1,3 +1,8 @@
+"""Arsenal
+Josephine Cattell
+This file will take the bullet from out bullet file and control it on the screen.
+This is based on the Eric Matthes 'Python Crash Course' walkthrough and  https://github.com/RedBeard41/alien_Invasion_starter.git
+4/12/26"""
 import pygame
 from typing import TYPE_CHECKING
 from bullet import bullet

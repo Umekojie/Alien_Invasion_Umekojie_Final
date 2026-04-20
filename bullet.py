@@ -1,3 +1,9 @@
+"""Bullet
+Josephine Cattell
+This file will create the rose bullets that the ship fires
+This is based on the Eric Matthes 'Python Crash Course' walkthrough and  https://github.com/RedBeard41/alien_Invasion_starter.git
+4/12/26"""
+
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING

@@ -1,3 +1,9 @@
+"""Settings
+Josephine Cattell
+This file defines the screen size and all other compoinents as well as the file routing
+This is based on the Eric Matthes 'Python Crash Course' walkthrough and  https://github.com/RedBeard41/alien_Invasion_starter.git
+4/12/26"""
+
 from pathlib import Path
 
 class Settings:
