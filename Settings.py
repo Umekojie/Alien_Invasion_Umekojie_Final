@@ -30,3 +30,9 @@ class Settings:
         self.bullet_h = 80
         self.bullet_amount = 5
         
+        self.alien_file = Path.cwd()/'Assets'/'images'/'grub_villan.png'
+        self.alien_w = 40
+        self.alien_h = 40
+        self.fleet_speed = 5
+        
+        
