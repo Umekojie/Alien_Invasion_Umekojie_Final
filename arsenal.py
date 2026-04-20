@@ -34,3 +34,6 @@ class ShipArsenal:
             self.arsenal.add(new_bullet)
             return True
         return False
+
+    def empty(self) -> None:
+        self.arsenal.empty()
