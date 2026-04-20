@@ -30,8 +30,16 @@ class Alien(Sprite):
 
     def update(self):
         temp_speed = self.settings.fleet_speed
-        self.x += temp_speed
+        # Check if alien has reached screen edge
+        if self.check_edges():
+            self.settings.fleet_direction *= -1
+        # Move alien in current direction
+        self.x += temp_speed * self.settings.fleet_direction
         self.rect.x = self.x
+
+    #collision decetion for grub
+    def check_edges(self):
+        return (self.rect.right >= self.boundries.right or self.rect.left <= self.boundries.left)
 
     def draw_alien(self):
         self.screen.blit(self.image, self.rect)
