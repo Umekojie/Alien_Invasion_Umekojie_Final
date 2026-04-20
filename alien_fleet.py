@@ -78,15 +78,35 @@ class AlienFleet:
 
         self.fleet.add(new_alien)
 
+    def _check_fleet_edges(self):
+        alien: Alien
+        for alien in self.fleet:
+            if alien.check_edges():
+                
+                self.fleet_direction *= -1
+                self._drop_alien_fleet()
+                break
+
+    def _drop_alien_fleet(self)-> None:
+    
+        for alien in self.fleet:
+            alien.y += self.fleet_drop_speed
+            
+
+    def update_fleet(self)-> None:
+       self._check_fleet_edges()
+       self.fleet.update()
+
+
     def draw(self)-> None:
         alien: Alien
         for alien in self.fleet:
             alien.draw_alien()
 
-    def update(self):
-        temp_speed = self.settings.ship_speed
-        if self.moving_right and self.rect.right < self.boundries.right:
-            self.x += temp_speed
-        if self.moving_left and self.rect.left > self.boundries.left:
-            self.x -= temp_speed
-        self.rect.x = self.x
+    #def update(self):
+        #temp_speed = self.settings.ship_speed
+       # if self.moving_right and self.rect.right < self.boundries.right:
+            #self.x += temp_speed
+        #if self.moving_left and self.rect.left > self.boundries.left:
+           # self.x -= temp_speed
+        #self.rect.x = self.x
