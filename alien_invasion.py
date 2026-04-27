@@ -15,17 +15,19 @@ from arsenal import ShipArsenal
 from alien_fleet import AlienFleet
 from time import sleep
 from button import Button
+from hud import HUD
 
 class AlienInvasion:
     def __init__(self):
         pygame.init()
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
-        self.game_stats = GameStats(self)
-        
+ 
         self.screen = pygame.display.set_mode((self.settings.screen_w, self.settings.screen_h))
         pygame.display.set_caption(self.settings.name)
         
+        self.game_stats = GameStats(self)
+        self.hud = HUD(self)        
         
         self.bg = pygame.image.load(self.settings.bg_file)
         self.bg = pygame.transform.scale(self.bg, (self.settings.screen_w, self.settings.screen_h))
@@ -48,9 +50,10 @@ class AlienInvasion:
         self.ship = Ship(self, ShipArsenal(self))
         self.alien_fleet = AlienFleet(self)
         #self.alien_ = Alien(self, 10, 10)
-        self.game_active = False
+        
+        self.play_button = Button(self, 'Play')
 
-        self.play_button = Button(self, "Start Game")
+        self.game_active = False
 
     def run_game(self)-> None:
         # game loop
@@ -79,12 +82,16 @@ class AlienInvasion:
         if collisions:
             self.impact_sound.play()
             self.game_stats.update(collisions)
+            self.hud.update_scores()
 
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
             self.settings.increase_difficulty()
+            # updete game stus level
             self.game_stats.update_level()
-            # update HUD view       
+            # update HUD view
+
+        
   
     def _check_game_status(self):
     
@@ -100,11 +107,15 @@ class AlienInvasion:
         self.ship.arsenal.empty()
         self.alien_fleet.empty()
         self.alien_fleet.create_fleet()
+
 #restart game
     def restart_game(self):
+        #setting up dynamic settings
         self.settings.initialize_dynamic_settings()
+        #reset game stats
         self.game_stats.reset_stats()
         #update HUD scores
+        self.hud.update_scores()
         #reset level
         self._reset_level()
         # recenter ship
@@ -117,18 +128,19 @@ class AlienInvasion:
         self.screen.blit(self.bg,(0,0))
         self.ship.draw()
         self.alien_fleet.draw()
-        # Draw HUD
+        # draw HUD
+        self.hud.draw()
 
         if not self.game_active:
             self.play_button.draw_button()
             pygame.mouse.set_visible(True)
-
         pygame.display.flip()
 
     def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+                self.game_stats.save_scores()
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN and self.game_active == True:
@@ -142,6 +154,7 @@ class AlienInvasion:
         mouse_pos = pygame.mouse.get_pos()
         if self.play_button.check_click(mouse_pos):
             self.restart_game()
+    
     
     def _check_keyup_events(self, event) -> None:
         if event.key == pygame.K_RIGHT:
@@ -164,6 +177,7 @@ class AlienInvasion:
             
         elif event.key == pygame.K_q:
             self.ship.moving_left = True
+            self.game_stats.save_scores()
             pygame.quit()
             sys.exit()
     
