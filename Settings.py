@@ -24,8 +24,8 @@ class Settings:
         self.ship_speed = 5
 
         self.bullet_file = Path.cwd()/'Assets'/'images'/'rosebullet.png'
-        self.laser_sound = Path.cwd()/'Assets'/'sound'/'laser.mp3'
-        self.impact_sound = Path.cwd()/'Assets'/'sound'/'impactSound.mp3'
+        self.laser_sound = Path.cwd()/'Assets'/'sound'/'bullet_sound.mp3'
+        self.impact_sound = Path.cwd()/'Assets'/'sound'/'defeat_enemy.mp3'
         self.bullet_speed = 7
         self.bullet_w = 25
         self.bullet_h = 80
@@ -37,4 +37,11 @@ class Settings:
         self.fleet_speed = 5
         self.fleet_direction = 1
         self.fleet_drop_speed = 40
-        
+
+        self.button_w = 200
+        self.button_h = 50
+        self.button_color = (139,69,19)
+        self.button_text_color = (128, 128, 0)
+        self.button_font_size = 30
+        self.HUD_font_size =20
+        self.font_file =Path.cwd()/'Assets'/'fonts'/'FleurDeLeah-Regular.ttf'
