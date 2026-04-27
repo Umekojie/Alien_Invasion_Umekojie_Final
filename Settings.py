@@ -58,6 +58,8 @@ class Settings:
         # Enemy settings
         self.fleet_speed = 2
         self.fleet_drop_speed = 40
+        self .alien_points = 50 # * level?
+
 
   def increase_difficulty(self):
         self.ship_speed += self.difficulty_scale
