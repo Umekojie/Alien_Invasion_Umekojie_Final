@@ -45,6 +45,7 @@ class Settings:
         self.button_font_size = 30
         self.HUD_font_size =20
         self.font_file =Path.cwd()/'Assets'/'fonts'/'FleurDeLeah-Regular.ttf'
+        self.scores_file = Path.cwd()/'Assets'/'file'/'scores.json'
 
   def initialize_dynamic_settings(self):
         # Ship settings
