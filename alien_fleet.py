@@ -37,12 +37,29 @@ class AlienFleet:
         self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
 
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
+        """Create aliens in a heart formation."""
+        center_col = fleet_w // 2
+        
         for row in range(fleet_h):
             for col in range(fleet_w):
+                distance_from_center = abs(col - center_col)
+                
+                # Create heart shape logic
+                if row < fleet_h * 0.3:  # Top section - two humps
+                    if distance_from_center < 4 or distance_from_center > 6:
+                        continue
+                elif row < fleet_h * 0.5:  # Upper middle - wider
+                    if distance_from_center > 5:
+                        continue
+                elif row < fleet_h * 0.7:  # Lower middle - narrowing
+                    if distance_from_center > 3:
+                        continue
+                else:  # Bottom - point of heart
+                    if distance_from_center > max(0, 3 - (row - int(fleet_h * 0.7))):
+                        continue
+                
                 current_x = alien_w * col + x_offset
                 current_y = alien_h * row + y_offset
-                if col % 2 == 0 or row % 2 == 0:
-                    continue
                 self._create_alien(current_x, current_y)
 
     def calculate_offsets(self, alien_w, screen_w, alien_h, screen_h):
@@ -58,8 +75,8 @@ class AlienFleet:
 
 
     def calculate_fleet_size(self, alien_w, screen_w, alien_h, screen_h):
-        fleet_w = (screen_w // alien_w)
-        fleet_h = (screen_h/2//alien_h)
+        fleet_w = (screen_w // alien_w) // 2
+        fleet_h = (screen_h/2//alien_h) // 2
         if fleet_w % 2 == 0:
             fleet_w -= 1
         else:
