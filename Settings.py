@@ -42,7 +42,7 @@ class Settings:
         self.scores_file = Path.cwd()/'Assets'/'file'/'scores.json'
         
         # life indicator settings
-        self.life_image_file = Path.cwd()/'Assets'/'images'/'ship.png'
+        self.life_image_file = Path.cwd()/'Assets'/'images'/'Ladyship.png'
         self.life_image_w = 25
         self.life_image_h = 25
 
